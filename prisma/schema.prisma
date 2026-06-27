@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Engagement {
+  id          String   @id @default(cuid())
+  fullname    String
+  email       String
+  phone       String?
+  region      String
+  comment     String?
+  ambassador  Boolean  @default(false)
+  newsletter  Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Contribution {
+  id        String   @id @default(cuid())
+  author    String
+  region    String?
+  theme     String
+  content   String
+  upvotes   Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Download {
+  id        String   @id @default(cuid())
+  fileType  String
+  fileName  String
+  createdAt DateTime @default(now())
+}
