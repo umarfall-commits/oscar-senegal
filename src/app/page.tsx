@@ -54,6 +54,7 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+
 /* ─── Types ─── */
 interface Stats {
   citizenCount: number;
@@ -86,6 +87,7 @@ const NAV_ITEMS = [
   { label: "Forum", href: "#forum" },
   { label: "Feuille de route", href: "#roadmap" },
   { label: "S'engager", href: "#engager" },
+  { label: "Transparence", href: "#transparence" },
 ];
 const THEMES_FORUM = [
   "Défi Jeunesse", "Gouvernance", "Éducation", "Économie",
@@ -309,15 +311,17 @@ export default function HomePage() {
         <div className="absolute top-20 right-0 w-96 h-96 bg-senegal-gold/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-senegal-green/5 rounded-full blur-3xl" />
         <div className="relative max-w-6xl mx-auto px-4 py-20 md:py-32">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+          <div className="grid lg:grid-cols-5 gap-8 items-center">
+          <motion.div className="lg:col-span-3" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <Badge variant="outline" className="mb-6 border-senegal-green/30 text-senegal-green text-xs">Livre Blanc — Diffusion libre et gratuite — 2026</Badge>
 
             {/* ── BIG OSCAR TITLE ── */}
-            <div className="mb-8">
+            <div className="mb-6">
               <h1 className="text-7xl sm:text-8xl md:text-9xl font-black tracking-tighter leading-[0.85] mb-4">
                 <span className="inline-block text-senegal-green drop-shadow-sm">O</span><span className="inline-block text-senegal-gold drop-shadow-sm">S</span><span className="inline-block text-senegal-red drop-shadow-sm">C</span><span className="inline-block text-senegal-green drop-shadow-sm">A</span><span className="inline-block text-senegal-gold drop-shadow-sm">R</span>
               </h1>
-              <div className="flex flex-wrap gap-x-2 gap-y-1 text-sm md:text-base font-medium text-muted-foreground">
+              <p className="text-2xl md:text-4xl font-black text-senegal-dark tracking-tight mb-4" style={{letterSpacing: "-0.02em"}}>Le changement commence par la connaissance</p>
+              <div className="flex flex-wrap gap-x-2 gap-y-1 text-sm md:text-base font-medium text-foreground/70">
                 <span>Orienté Résultats</span><span className="text-senegal-gold">·</span>
                 <span>Souverain &amp; Solidaire</span><span className="text-senegal-red">·</span>
                 <span>Compétent</span><span className="text-senegal-gold">·</span>
@@ -330,7 +334,7 @@ export default function HomePage() {
               Un nouveau modèle pour le <span className="text-senegal-green">Sénégal</span>
             </h2>
             <p className="text-base md:text-lg text-muted-foreground mb-4 max-w-2xl leading-relaxed">
-              Notre pays traverse une crise silencieuse : dualité au sommet de l&apos;État, absence de débat sur l&apos;avenir, jeunesse sacrifiée, confiance brisée. Le modèle classique de gouvernance est <strong className="text-foreground">épuisé</strong>.
+              Notre pays traverse une crise silencieuse : dualité au sommet de l&apos;État, absence de débat sur l&apos;avenir, jeunesse sacrifiée par tous les régimes, confiance brisée. Le modèle classique de gouvernance est <strong className="text-foreground">épuisé</strong>.
             </p>
             <p className="text-base md:text-lg text-muted-foreground mb-10 max-w-2xl leading-relaxed">
               <strong className="text-foreground">OSCAR</strong> propose une alternative concrète, pragmatique et africaine : un État orienté résultats, où la compétence prime sur la connivence, où la transparence est la règle, et où le citoyen redevient acteur.
@@ -340,6 +344,10 @@ export default function HomePage() {
               <a href="#forum"><Button size="lg" variant="outline" className="rounded-full gap-2 border-senegal-gold text-senegal-dark hover:bg-senegal-gold/10"><MessageSquare className="h-4 w-4" /> Contribuer au débat</Button></a>
             </div>
           </motion.div>
+          <motion.div className="lg:col-span-2 hidden lg:block" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.3 }}>
+            <img src="/senegal-map.png" alt="Carte du Sénégal — OSCAR connecte les 14 régions" className="w-full h-auto max-h-[520px] rounded-2xl drop-shadow-2xl" />
+          </motion.div>
+          </div>
           <motion.div className="mt-16" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
             <a href="#fonctionnement" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-senegal-green transition-colors">
               Découvrir comment ça fonctionne <ArrowDown className="h-4 w-4 animate-bounce" />
@@ -394,7 +402,7 @@ export default function HomePage() {
         <SectionTitle>Télécharger le Livre Blanc</SectionTitle>
         <p className="text-muted-foreground mb-8 pl-6">Gratuit, libre de diffusion, sans inscription préalable. Partagez-le autour de vous.</p>
         <div className="grid md:grid-cols-2 gap-4 mb-10">
-          <a href="/documents/livre-blanc-oscar-complet.docx" download onClick={() => trackDownload("livre-blanc-complet", "Livre Blanc OSCAR complet")}>
+          <a href="/documents/livre-blanc-oscar-complet.pdf" download onClick={() => trackDownload("livre-blanc-complet", "Livre Blanc OSCAR complet")}>
             <Card className="hover:shadow-lg transition-shadow cursor-pointer group h-full">
               <CardContent className="p-6 flex items-start gap-4">
                 <div className="bg-senegal-green/10 p-4 rounded-xl group-hover:bg-senegal-green/20 transition-colors">
@@ -403,13 +411,13 @@ export default function HomePage() {
                 <div className="flex-1">
                   <h3 className="font-bold text-lg mb-1">Version complète</h3>
                   <p className="text-sm text-muted-foreground mb-3">Le document intégral avec toutes les annexes, analyses et feuilles de route.</p>
-                  <Badge variant="secondary" className="text-xs">Document complet (.docx)</Badge>
+                  <Badge variant="secondary" className="text-xs">Document complet (.pdf)</Badge>
                 </div>
                 <Download className="h-5 w-5 text-muted-foreground mt-1" />
               </CardContent>
             </Card>
           </a>
-          <a href="/documents/livre-blanc-oscar-court.docx" download onClick={() => trackDownload("livre-blanc-court", "Livre Blanc OSCAR version courte")}>
+          <a href="/documents/livre-blanc-oscar-court.pdf" download onClick={() => trackDownload("livre-blanc-court", "Livre Blanc OSCAR version courte")}>
             <Card className="hover:shadow-lg transition-shadow cursor-pointer group h-full">
               <CardContent className="p-6 flex items-start gap-4">
                 <div className="bg-senegal-gold/10 p-4 rounded-xl group-hover:bg-senegal-gold/20 transition-colors">
@@ -418,7 +426,7 @@ export default function HomePage() {
                 <div className="flex-1">
                   <h3 className="font-bold text-lg mb-1">Version de synthèse</h3>
                   <p className="text-sm text-muted-foreground mb-3">L&apos;essentiel du manifeste en 30 minutes de lecture. Idéal pour partager.</p>
-                  <Badge variant="secondary" className="text-xs">Synthèse 8 pages (.docx)</Badge>
+                  <Badge variant="secondary" className="text-xs">Synthèse 8 pages (.pdf)</Badge>
                 </div>
                 <Download className="h-5 w-5 text-muted-foreground mt-1" />
               </CardContent>
@@ -430,11 +438,11 @@ export default function HomePage() {
         <p className="text-sm text-muted-foreground mb-4 pl-2">Documents juridiques et opérationnels du modèle OSCAR — téléchargeables séparément.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {[
-            { letter: "A", title: "Charte de Gouvernance", desc: "Projet de loi constitutionnelle", file: "annexe-a-charte-gouvernance.docx" },
-            { letter: "B", title: "Contrat de Performance", desc: "Pour Premier ministre et ministres", file: "annexe-b-contrat-performance.docx" },
-            { letter: "C", title: "Contrat Citoyen", desc: "Version juridique simplifiée", file: "annexe-c-contrat-citoyen.docx" },
-            { letter: "D", title: "Indicateurs du TBN", desc: "Tableau de bord de la Nation", file: "annexe-d-indicateurs-tbn.docx" },
-            { letter: "E", title: "Calendrier de transition", desc: "Feuille de route 2026–2035", file: "annexe-e-calendrier-transition.docx" },
+            { letter: "A", title: "Charte de Gouvernance", desc: "Projet de loi constitutionnelle", file: "annexe-a-charte-gouvernance.pdf" },
+            { letter: "B", title: "Contrat de Performance", desc: "Pour Premier ministre et ministres", file: "annexe-b-contrat-performance.pdf" },
+            { letter: "C", title: "Contrat Citoyen", desc: "Version juridique simplifiée", file: "annexe-c-contrat-citoyen.pdf" },
+            { letter: "D", title: "Indicateurs du TBN", desc: "Tableau de bord de la Nation", file: "annexe-d-indicateurs-tbn.pdf" },
+            { letter: "E", title: "Calendrier de transition", desc: "Feuille de route 2026–2035", file: "annexe-e-calendrier-transition.pdf" },
           ].map((a) => (
             <a key={a.letter} href={`/documents/${a.file}`} download onClick={() => trackDownload(`annexe-${a.letter.toLowerCase()}`, a.title)}>
               <Card className="hover:shadow-md transition-shadow cursor-pointer group">
@@ -653,13 +661,58 @@ export default function HomePage() {
                 <div>
                   <h3 className="font-bold">ONG RABEC</h3>
                   <p className="text-sm text-muted-foreground mt-1">Partenaire stratégique du mouvement OSCAR. L&apos;ONG RABEC accompagne la diffusion du Livre Blanc et soutient les initiatives citoyennes sur le terrain.</p>
-                  <a href="soutien.html" className="text-sm text-senegal-green font-medium hover:underline mt-2 inline-block">Soutenir financièrement le projet via RABEC →</a>
+                  <a href="https://rabec.org/" target="_blank" rel="noopener noreferrer" className="text-sm text-senegal-green font-medium hover:underline mt-2 inline-block">Visiter le site de l'ONG RABEC →</a>
                 </div>
+              </CardContent></Card>
+              <Card><CardContent className="p-5">
+                <h3 className="font-bold mb-2 flex items-center gap-2"><Heart className="h-5 w-5 text-senegal-red" />Contributions financières</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-3">Vos contributions serviront exclusivement à l&apos;organisation de <strong className="text-foreground">panels citoyens</strong> et de <strong className="text-foreground">mobilisations sociales</strong> pour la diffusion d&apos;OSCAR dans les quartiers, afin de promouvoir la nouvelle conscience citoyenne.</p>
+                <div className="bg-senegal-gold/10 rounded-lg p-3 mb-3">
+                  <p className="text-sm font-semibold text-senegal-dark">Soutenir par Wave ou Orange Money :</p>
+                  <p className="text-xl font-black text-senegal-green mt-1 tracking-wide">78 000 00 00</p>
+                </div>
+                <a href="#transparence" className="text-xs text-senegal-green font-medium hover:underline">Voir les rapports de mobilisations →</a>
               </CardContent></Card>
               <p className="text-xs text-muted-foreground mb-3">Le soutien financier est totalement optionnel et volontaire.</p>
               <p className="text-xs text-muted-foreground"><span className="font-medium text-foreground">Statistiques ANSD</span> — Les données chiffrées seront enrichies avec les statistiques officielles de l&apos;Agence Nationale de la Statistique et de la Démographie (ANSD) du Sénégal.</p>
             </div>
           </div>
+        </div>
+      </Section>
+
+      {/* ═══ TRANSPARENCE — RAPPORTS DE MOBILISATIONS ═══ */}
+      <Section id="transparence" className="bg-muted/30">
+        <SectionTitle color="gold">Transparence — Rapports de mobilisations</SectionTitle>
+        <p className="text-muted-foreground mb-8 pl-6 max-w-2xl">Chaque franc collecté est tracé. Voici les rapports de mobilisations organisées pour la diffusion d&apos;OSCAR dans les quartiers.</p>
+        <div className="max-w-3xl">
+          <Card><CardContent className="p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <FileText className="h-6 w-6 text-senegal-green" />
+              <h3 className="font-bold text-lg">Formulaire de rapport de mobilisation</h3>
+            </div>
+            <p className="text-sm text-muted-foreground mb-6">Après chaque activité de terrain, remplissez ce rapport pour garantir la transparence totale.</p>
+            <div className="grid sm:grid-cols-2 gap-4 mb-4">
+              <div><Label className="text-xs">Région *</Label><Input placeholder="Ex : Dakar" /></div>
+              <div><Label className="text-xs">Département *</Label><Input placeholder="Ex : Dakar Plateau" /></div>
+              <div><Label className="text-xs">Commune *</Label><Input placeholder="Ex : Médina" /></div>
+              <div><Label className="text-xs">Quartier *</Label><Input placeholder="Ex : Grand Médine" /></div>
+              <div><Label className="text-xs">Date de la mobilisation *</Label><Input type="date" /></div>
+              <div><Label className="text-xs">Personne focale *</Label><Input placeholder="Nom et téléphone" /></div>
+              <div><Label className="text-xs">Nombre de participants</Label><Input type="number" placeholder="0" /></div>
+              <div><Label className="text-xs">Type d&apos;activité</Label>
+                <Select><SelectTrigger><SelectValue placeholder="Choisir" /></SelectTrigger><SelectContent>
+                  <SelectItem value="panel">Panel citoyen</SelectItem>
+                  <SelectItem value="distribution">Distribution Livre Blanc</SelectItem>
+                  <SelectItem value="debat">Débat de quartier</SelectItem>
+                  <SelectItem value="marche">Marche de sensibilisation</SelectItem>
+                  <SelectItem value="autre">Autre</SelectItem>
+                </SelectContent></Select>
+              </div>
+            </div>
+            <div><Label className="text-xs">Compte-rendu détaillé *</Label><Textarea placeholder="Décrivez le déroulement, les réactions, les résolutions prises..." rows={4} /></div>
+            <Button className="w-full mt-4 bg-senegal-green hover:bg-senegal-green/90 text-white rounded-full">Soumettre le rapport</Button>
+          </CardContent></Card>
+          <p className="text-xs text-muted-foreground mt-4 text-center">Les rapports soumis seront vérifiés et publiés ci-dessous pour une transparence totale.</p>
         </div>
       </Section>
 
